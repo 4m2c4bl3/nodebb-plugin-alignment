@@ -1,0 +1,30 @@
+{
+	"id": "nodebb-plugin-alignment",
+	"library": "./library.js",
+	"hooks": [
+		{
+			"hook": "filter:composer.formatting",
+			"method": "composerFormatting"
+		},
+		{
+			"hook": "filter:parse.post",
+			"method": "parsePost",
+			"priority": 10
+		},
+		{
+			"hook": "filter:parse.raw",
+			"method": "parseRaw",
+			"priority": 10
+		}
+	],
+	"staticDirs": {
+		"static": "./static",
+		"img": "./static/img"
+	},
+	"less": [
+		"static/style.less"
+	],
+	"scripts": [
+		"static/main.js"
+	]
+}

@@ -1,0 +1,31 @@
+.align-img::before{
+    display: inline-flex;
+    content: ' ';
+    width: 14px;
+    height: 14px;
+    background-color: #333;
+}
+.right::before{
+    -webkit-mask: url(plugins/nodebb-plugin-alignment/img/if_image-break-right.svg) no-repeat 50% 50%;
+    mask: url(plugins/nodebb-plugin-alignment/img/if_image-break-right.svg) no-repeat 50% 50%;
+}
+.left::before{
+    -webkit-mask: url(plugins/nodebb-plugin-alignment/img/if_image-break-left.svg) no-repeat 50% 50%;
+    mask: url(plugins/nodebb-plugin-alignment/img/if_image-break-left.svg) no-repeat 50% 50%;
+}
+
+.align-center{
+    text-align: center;
+}
+.align-left{
+    text-align: left;
+}
+.align-right{
+    text-align: right;
+}
+.float-left, .float-left img{
+    float: left;
+}
+.float-right, .float-right img{
+    float: right;
+}

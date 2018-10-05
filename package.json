@@ -1,0 +1,12 @@
+{
+  "name": "nodebb-plugin-alignment",
+  "version": "0.0.1",
+  "keywords": [
+    "nodebb",
+    "alignment"
+  ],
+  "license": "MIT",
+  "nbbpm": {
+    "compatibility": "^1.10.x"
+  }
+}
