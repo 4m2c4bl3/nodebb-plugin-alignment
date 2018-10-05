@@ -40,7 +40,7 @@ const parsePost = (data, callback) => {
 	newContent = newContent.replace(/\[right\]/gm, '<p class="align-right">');
 	newContent = newContent.replace(/\[floatLeft\]/gm, '<p class="float-left">');
 	newContent = newContent.replace(/\[floatRight\]/gm, '<p class="float-right">');
-	newContent = newContent.replace(/\[\/\w*\]/gm, '</p>');
+	newContent = newContent.replace(/\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</p>');
 	const newData = { ...data };
 	newData.postData.content = newContent;
 	console.log(newContent);
@@ -57,7 +57,7 @@ const parseRaw = (data, callback) => {
 	newContent = newContent.replace(/\[right\]/gm, '<p class="align-right">');
 	newContent = newContent.replace(/\[floatLeft\]/gm, '<p class="float-left">');
 	newContent = newContent.replace(/\[floatRight\]/gm, '<p class="float-right">');
-	newContent = newContent.replace(/\[\/\w*\]/gm, '</p>');
+	newContent = newContent.replace(/\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</p>');
 	callback(null, newContent);
 };
 module.exports.parseRaw = parseRaw;
