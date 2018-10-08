@@ -32,8 +32,6 @@ const composerFormatting = (data, callback) => {
 module.exports.composerFormatting = composerFormatting;
 
 const parsePost = (data, callback) => {
-	console.log('parse post');
-	console.log(data.postData.content);
 	var newContent = data.postData.content;
 	newContent = newContent.replace(/\[center\]/gm, '<p class="align-center">');
 	newContent = newContent.replace(/\[left\]/gm, '<p class="align-left">');
@@ -43,14 +41,11 @@ const parsePost = (data, callback) => {
 	newContent = newContent.replace(/\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</p>');
 	const newData = { ...data };
 	newData.postData.content = newContent;
-	console.log(newContent);
 	callback(null, newData);
 };
 module.exports.parsePost = parsePost;
 
 const parseRaw = (data, callback) => {
-	console.log('parse raw');
-	console.log(data);
 	var newContent = data;
 	newContent = newContent.replace(/\[center\]/gm, '<p class="align-center">');
 	newContent = newContent.replace(/\[left\]/gm, '<p class="align-left">');
