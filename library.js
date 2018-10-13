@@ -31,14 +31,17 @@ const composerFormatting = (data, callback) => {
 };
 module.exports.composerFormatting = composerFormatting;
 
+const replaceAlignmentContent = (content) => {
+	var newContent = content;
+	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[(center|left|right)\]/gm, (match, p1) => `<section class="align-${p1}">`);
+	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[floatLeft\]/gm, '<section class="float-left">');
+	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[floatRight\]/gm, '<section class="float-right">');
+	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</section>'); 
+	return newContent;
+}
+
 const parsePost = (data, callback) => {
-	var newContent = data.postData.content;
-	newContent = newContent.replace(/\[center\]/gm, '<p class="align-center">');
-	newContent = newContent.replace(/\[left\]/gm, '<p class="align-left">');
-	newContent = newContent.replace(/\[right\]/gm, '<p class="align-right">');
-	newContent = newContent.replace(/\[floatLeft\]/gm, '<p class="float-left">');
-	newContent = newContent.replace(/\[floatRight\]/gm, '<p class="float-right">');
-	newContent = newContent.replace(/\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</p>');
+	var newContent = replaceAlignmentContent(data.postData.content);
 	const newData = { ...data };
 	newData.postData.content = newContent;
 	callback(null, newData);
@@ -46,13 +49,7 @@ const parsePost = (data, callback) => {
 module.exports.parsePost = parsePost;
 
 const parseRaw = (data, callback) => {
-	var newContent = data;
-	newContent = newContent.replace(/\[center\]/gm, '<p class="align-center">');
-	newContent = newContent.replace(/\[left\]/gm, '<p class="align-left">');
-	newContent = newContent.replace(/\[right\]/gm, '<p class="align-right">');
-	newContent = newContent.replace(/\[floatLeft\]/gm, '<p class="float-left">');
-	newContent = newContent.replace(/\[floatRight\]/gm, '<p class="float-right">');
-	newContent = newContent.replace(/\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</p>');
+	var newContent = replaceAlignmentContent(data);
 	callback(null, newContent);
 };
 module.exports.parseRaw = parseRaw;
