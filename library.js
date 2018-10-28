@@ -33,10 +33,10 @@ module.exports.composerFormatting = composerFormatting;
 
 const replaceAlignmentContent = (content) => {
 	var newContent = content;
-	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[(center|left|right)\]/gm, (match, p1) => `<section class="align-${p1}">`);
-	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[floatLeft\]/gm, '<section class="float-left">');
-	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[floatRight\]/gm, '<section class="float-right">');
-	newContent = newContent.replace(/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</section>'); 
+	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[(center|left|right)\]/gm, (match, p1) => `<section class="align-${p1}">`);
+	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[floatLeft\]/gm, '<section class="float-left">');
+	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[floatRight\]/gm, '<section class="float-right">');
+	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</section>'); 
 	return newContent;
 }
 
