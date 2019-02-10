@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-alignment",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/am1cable/nodebb-plugin-alignment.git"

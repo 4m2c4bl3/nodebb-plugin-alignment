@@ -33,11 +33,23 @@ module.exports.composerFormatting = composerFormatting;
 
 const replaceAlignmentContent = (content) => {
 	var newContent = content;
-	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[(center|left|right)\]/gm, (match, p1) => `<section class="align-${p1}">`);
-	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[floatLeft\]/gm, '<section class="float-left">');
-	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[floatRight\]/gm, '<section class="float-right">');
-	newContent = newContent.replace(/(?:(?<!<code>)|(?<=<\/code>))\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</section>'); 
+	if (newContent.includes('<code')) {
+		const separatedByCodeBlocks = newContent.replace(/<code/gi, "splitme<code").replace(/<\/code>/gi, "<\/code>splitme").split("splitme");
+		const formattedBlocks = separatedByCodeBlocks.map(text => text.includes('<code') ? text : formatFloat(text));
+		newContent = formattedBlocks.join('');
+	}else{
+		newContent = formatFloat(newContent);
+	}	
 	return newContent;
+}
+
+const formatFloat = (text) => {
+	var formatted = text;
+	formatted = formatted.replace(/\[(center|left|right)\]/gm, (match, p1) => `<section class="align-${p1}">`);
+	formatted = formatted.replace(/\[floatLeft\]/gm, '<section class="float-left">');
+	formatted = formatted.replace(/\[floatRight\]/gm, '<section class="float-right">');
+	formatted = formatted.replace(/\[\/(?:center|left|right|floatLeft|floatRight)\]/gm, '</section>'); 
+	return formatted;
 }
 
 const parsePost = (data, callback) => {
